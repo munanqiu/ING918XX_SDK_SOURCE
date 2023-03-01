@@ -14,7 +14,6 @@
 
 typedef struct {
 	uint32_t   bank_size;
-    uint32_t   bank_num;
 	uintptr_t  banks[2];
 } hal_flash_bank_eflash_t;
 

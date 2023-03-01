@@ -89,7 +89,7 @@ int mesh_storage_is_name_set(void){
 }
 
 // name set.
-void mesh_storage_name_set(uint8_t *name, uint16_t len, uint8_t now){
+void mesh_storage_name_set(uint8_t *name, uint16_t len){
     mesh_app_storage_db_t *store = (mesh_app_storage_db_t *)kv_get(MESH_STORAGE_APP_KEY, NULL);
     if (NULL == store)
         return;
@@ -97,11 +97,7 @@ void mesh_storage_name_set(uint8_t *name, uint16_t len, uint8_t now){
     memcpy(store->name, name, len);
     store->name_len = len;
     store->flag |= MESH_FLAG_BIT_NAME;
-    if(now){
-        kv_commit(0);
-    } else {
-        kv_value_modified();
-    }
+    kv_value_modified();
 }
 
 /* ------------------------------- gatt addr --------------------------------*/
